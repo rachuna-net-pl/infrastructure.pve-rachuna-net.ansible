@@ -1,0 +1,75 @@
+---
+- name: Proxmox Hardening Machine
+  hosts: ['pve']
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: set-timezone
+      vars:
+        input_timezone: "{{ inv_all_timezone }}"
+        input_locale: "{{ inv_all_locale }}"
+        input_language: "{{ inv_all_language }}"
+        input_lc_all: "{{ inv_all_lc_all }}"
+
+    # - role: configure-ssh
+    #   vars:
+    #     in_sshd_config: "{{ inv_sshd_config }}"
+    #   tags:
+    #     - hardening
+
+    # - role: configure-sudo
+    #   vars:
+    #     in_custom_groups: "{{ inv_all_sudo_groups }}"
+    #   tags:
+    #     - users
+    #     - hardening
+
+    # - role: install-packages
+    #   vars:
+    #     in_ubuntu_repositories: "{{ inv_group_repositories | default([]) }}"
+    #     in_packages_to_install: "{{ inv_group_packages | default([]) }}"
+    #     in_packages_to_remove: "{{ inv_group_remove_packages | default([]) }}"
+    #   tags:
+    #     - hardening
+
+    # - role: set-hostname
+    #   vars:
+    #     in_hostname_fqdn: "{{ fqdn }}"
+    #     in_disabled_reboot: true
+    #     in_disable_set_hostname: "{{ inv_host_disable_set_hostname | default(false) }}"
+    #     in_register_mikrotik_dns: true
+    #     in_mikrotik_configuration: "{{ inv_mikrotik_configuration }}"
+    #     in_register_mikrotik_dns_domains: "{{ inv_host_register_mikrotik_dns_domains | default([]) }}"
+    #   tags:
+    #     - hardening
+
+    # - role: ca-certificates
+    #   vars:
+    #     in_certificates: "{{ inv_certificates }}"
+    #     in_mikrotik_configuration: "{{ inv_mikrotik_configuration }}"
+    #     in_certbot_deploy_user_snippet: "{{ inv_certbot_deploy_user_snippet }}"
+    #     in_certbot_list_domains: "{{ inv_host_certbot_list_domains }}"
+
+    # - role: install-consul
+    #   vars:
+    #     in_debug: true
+    #     in_config: "{{ inv_group_consul_config }}"
+    #     in_consul_ssl_ca: "{{ inv_group_consul_ssl_ca | default('') }}"
+    #     in_consul_ssl_certificate: "{{ inv_group_consul_ssl_certificate | default('') }}"
+    #     in_consul_ssl_private_key: "{{ inv_group_consul_ssl_private_key | default('') }}"
+
+    # - role: install-vault
+    #   vars:
+    #     in_debug: true
+    #     in_vault_address: "{{ inv_group_vault_address }}"
+    #     in_node_fqdn: "{{ fqdn }}"
+    #     in_consul_config: "{{ inv_group_consul_config }}"
+    #     # ======= SSL =======
+    #     in_vault_tls_disabled: "{{ inv_group_vault_tls_disabled | default(true) }}"
+    #     in_vault_ssl_ca: "{{ inv_group_vault_ssl_ca | default('') }}"
+    #     in_vault_ssl_certificate: "{{ inv_group_vault_ssl_certificate | default('') }}"
+    #     in_vault_ssl_private_key: "{{ inv_group_vault_ssl_private_key | default('') }}"
+
+    #     in_unseal_keys: "{{ inv_group_vault_unseal_keys | default([]) }}"
+    #     in_vault_auto_unseal: true

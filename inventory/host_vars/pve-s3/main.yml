@@ -1,0 +1,6 @@
+---
+ansible_host: "pve-s3.{{ inv_all_root_root_domain }}"
+# ansible_host: "10.3.0.13"
+fqdn: "pve-s3.{{ inv_all_root_root_domain }}"
+ansible_user: "{{ lookup('env', 'ANSIBLE_USER') }}"
+ansible_become_pass: "{{ lookup('env', 'ANSIBLE_PASSWORD') }}"

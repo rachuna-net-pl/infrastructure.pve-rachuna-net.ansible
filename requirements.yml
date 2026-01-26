@@ -1,0 +1,5 @@
+---
+- name: "set-timezone"
+  src: "git@gitlab.com:pl.rachuna-net/artifacts/ansible-roles/set-timezone.git"
+  scm: git
+  version: "v1.0.0"
