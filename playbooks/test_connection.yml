@@ -1,0 +1,14 @@
+---
+- name: Test Connection
+  hosts: ['pve']
+  become: true
+  gather_facts: true
+
+  tasks:
+    - ping:
+    - debug:
+        msg: "{{ ansible_facts.hostname }}"
+
+    - name: Show controller IP used in SSH connection
+      debug:
+        msg: "Ansible connects from IP: {{ ansible_facts.default_ipv4.address }}"
