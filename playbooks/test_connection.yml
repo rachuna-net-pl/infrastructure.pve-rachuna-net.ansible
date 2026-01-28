@@ -5,10 +5,14 @@
   gather_facts: true
 
   tasks:
-    - ping:
-    - debug:
+
+    - name: Ping
+      ansible.builtin.ping:
+
+    - name: "Show hostname"
+      ansible.builtin.debug:
         msg: "{{ ansible_facts.hostname }}"
 
     - name: Show controller IP used in SSH connection
-      debug:
+      ansible.builtin.debug:
         msg: "Ansible connects from IP: {{ ansible_facts.default_ipv4.address }}"

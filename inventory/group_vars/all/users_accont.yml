@@ -1,0 +1,11 @@
+---
+inv_all_user_accounts:
+  mrachuna:
+    username: mrachuna
+    comment: "Maciej Rachuna"
+    shell: /bin/bash
+    system_groups:
+      - administrators
+    authorized_keys:
+      - authorized_key: "{{ lookup('community.hashi_vault.vault_kv2_get', 'users/mrachuna', engine_mount_point='kv-devops')['secret']['ssh_pub_key'] }}"
+        state: present
