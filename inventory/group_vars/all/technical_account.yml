@@ -1,0 +1,34 @@
+---
+inv_all_technical_accounts:
+  techuser:
+    username: techuser
+    comment: "Użytkownik techniczny ansible"
+    shell: /bin/bash
+    system_groups:
+      - technical_accounts
+    public_ssh_key: >-
+      {{
+        lookup(
+          'community.hashi_vault.vault_kv2_get',
+          'pl.rachuna-net/infrastructure/opentofu/iac-proxmox/account/techuser',
+          engine_mount_point='kv-gitlab'
+        )['secret']['public_ssh_key']
+      }}
+    private_ssh_key: >-
+      {{
+        lookup(
+          'community.hashi_vault.vault_kv2_get',
+          'pl.rachuna-net/infrastructure/opentofu/iac-proxmox/account/techuser',
+          engine_mount_point='kv-gitlab'
+        )['secret']['private_ssh_key']
+      }}
+    authorized_keys:
+      - authorized_key: >-
+          {{
+            lookup(
+              'community.hashi_vault.vault_kv2_get',
+              'pl.rachuna-net/infrastructure/opentofu/iac-proxmox/account/techuser',
+              engine_mount_point='kv-gitlab'
+            )['secret']['public_ssh_key']
+          }}
+        state: present
